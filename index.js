@@ -25,8 +25,8 @@ const getBikeNetwork = async () => {
 
 const coordinates = [];
 getBikeNetwork().then(bikeData => {
-bikeData.network.stations.forEach(({ /*name*/ latitude, longitude }) => {
-  coordinates.push({ /*name*/longitude, latitude });
+bikeData.network.stations.forEach(({ name, latitude, longitude }) => {
+  coordinates.push({ name, longitude, latitude });
   
 });
 
@@ -35,7 +35,7 @@ console.log(coordinates);
 coordinates.forEach(function(station)  {
   new maplibregl.Marker({ color: "red" })
       .setLngLat([station.longitude, station.latitude])
-      .setPopup(new maplibregl.Popup().setHTML("Station"))
+      .setPopup(new maplibregl.Popup().setHTML(station.name))
       .addTo(map);
       });
 
