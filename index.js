@@ -13,9 +13,7 @@ var marker = new maplibregl.Marker({ color: "red" })
 
 const getBikeNetwork = async () => {
   try {
-    const response = await fetch("https://api.citybik.es/v2/networks/bicimad", {
-      mode: "no-cors",
-    });
+    const response = await fetch("https://api.citybik.es/v2/networks/bicimad");
     const data = await response.json();
     //console.log(data);
     return data;
@@ -24,12 +22,25 @@ const getBikeNetwork = async () => {
   }
 };
 
-const bikeData = getBikeNetwork();
 
 const coordinates = [];
-bikeData.network.stations.forEach(({ latitude, longitude }) => {
-  coordinates.push({ longitude, latitude });
+getBikeNetwork().then(bikeData => {
+bikeData.network.stations.forEach(({ /*name*/ latitude, longitude }) => {
+  coordinates.push({ /*name*/longitude, latitude });
+  
 });
+
+console.log(coordinates);
+  
+coordinates.forEach(function(station)  {
+  new maplibregl.Marker({ color: "red" })
+      .setLngLat([station.longitude, station.latitude])
+      .setPopup(new maplibregl.Popup().setHTML("Station"))
+      .addTo(map);
+      });
+
+});
+
 
 
 /*
