@@ -37,12 +37,12 @@ getBikeNetwork().then((bikeData) => {
     new maplibregl.Marker({ color: "red" })
       .setLngLat([station.longitude, station.latitude])
       //.setPopup(new maplibregl.Popup().setHTML(station.name, station.free_bikes, station.empty_slots))
+      //.setPopup(new maplibregl.Popup().setHTML(`Station:${station.name}, <br>Free Bikes:${station.free_bikes}<br>,Empty Sots:${station.empty_slots}`) )
       .setPopup(
         new maplibregl.Popup().setHTML(
-          `Station:${station.name}, <br>Free Bikes:${station.free_bikes}<br>,Empty Sots:${station.empty_slots}`
+          `<div>Station:${station.name}, <br>Free Bikes:${station.free_bikes}, <br>Empty Sots:${station.empty_slots}</div>`
         )
       )
-      //.setPopup(new maplibregl.Popup().setHTML(`<div>Station:${station.name}, <br>Free Bikes:${station.free_bikes}, <br>Empty Sots:${station.empty_slots}</div>`))
       .addTo(map);
   });
 });
